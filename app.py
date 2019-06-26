@@ -1,7 +1,7 @@
 import os
 import sys
 from flask import Flask, jsonify, request, Blueprint, render_template, make_response
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 CWD = os.path.dirname(os.path.realpath(__file__))
@@ -19,8 +19,8 @@ client_bp = Blueprint(
     'client_app', __name__,
     url_prefix='',
     static_url_path='',
-    static_folder='../client/dist',
-    template_folder='../client/dist',
+    static_folder='../luscient-website/dist',
+    template_folder='../luscient-website/dist',
 )
 
 
@@ -38,7 +38,7 @@ def artifact():
 DEBUG = True
 
 # instantiate the app
-app = Flask(__name__, static_url_path='', static_folder='../client/dist',)
+app = Flask(__name__, static_url_path='', static_folder='../luscient-website/dist',)
 app.config.from_object(__name__)
 # app.register_blueprint(api_bp)
 app.register_blueprint(client_bp)
@@ -53,15 +53,16 @@ limiter = Limiter(
 
 
 @app.route('/api', methods=['GET', 'POST'])
+@cross_origin()
 @limiter.limit('50 per day')
 def fact_extraction():
     text = None
     if request.method == 'POST':
         text = request.get_json().get('text')
-        get_named_entities = request.get_json().get('named_entities', True)
-        detect_valence = request.get_json().get('detect_valence', True)
-        get_func_rels = request.get_json().get('func_rels', True)
-        sigma_graph = request.get_json().get('sigma_graph')
+        get_named_entities = request.get_json().get('named_entities', False)
+        detect_valence = request.get_json().get('detect_valence', False)
+        get_func_rels = request.get_json().get('get_func_rels', False)
+        sigma_graph = request.get_json().get('sigma_graph',  True)
         pmid = request.get_json().get('pmid', False)
         coref_clusters = request.get_json().get('coref_clustsers', False)
         resolve_corefs = request.get_json().get('resolve_corefs', False)
@@ -70,7 +71,7 @@ def fact_extraction():
         tree_plots = request.get_json().get('tree_plots', False)
         # resolve_acros = request.get_json().get('resolve_acros', False)
         resolve_acros = False
-        markdown_tables = request.get_json().get('markdown_tables', True)
+        markdown_tables = request.get_json().get('markdown_tables', False)
     if request.method == 'GET':
         text = request.args.get('text')
     if not text:

@@ -9,7 +9,10 @@ text = 'BFT induces the antiapoptotic protein cIAP2 and the polyamine catalyst s
 
 data = {
     'text': text,
-    'named_entities': True,
+    # 'named_entities': True,
+    'named_entities': False,
+    'detect_valence': False,
+    'func_rels': False,
 }
 
 r = requests.post(api, json=data)

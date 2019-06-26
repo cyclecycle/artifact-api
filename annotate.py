@@ -3,6 +3,7 @@ import becas
 from pprint import pprint
 
 becas.email = 'luscient.tech@gmail.com'
+becas.tool = 'artifact-api'
 
 
 def annotate_triples_with_ents(triple_data, named_ents):
