@@ -1,0 +1,57 @@
+/artifact/
+  type: post
+  params:
+    text
+    named_entities
+      source
+        pubmed
+          pmid
+        dbpedia
+    detect_valence
+      boolean
+    directional_assertions
+      boolean
+  response:
+    original_text
+    processed_text
+    chunked_parse_tree
+    entity_phrase_relationships:
+      list of:
+        entity_phrase_left
+        relationship
+        entity_phrase_right
+      each containing:
+        tokens:
+          list of:
+            token:
+              text, span
+        text
+        valence (if detect valence)
+        component_id
+        named_entities:
+          name
+          position
+          references:
+            source
+            identifier
+      also contains:
+        context:
+          list of:
+            name
+            position
+            references:
+              source identifer
+            relation_to:
+              component_id
+              token_distance
+              sentence_distance
+    directional_assertions:
+      list of:
+        precendent:
+          text
+          valence
+        antecent:
+          text
+          valence
+        child_of:
+          component_id

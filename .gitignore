@@ -1,0 +1,6 @@
+env
+__pycache__
+*ipy*
+response.json
+requirements_dev.txt
+server/visualise_spacy_tree
