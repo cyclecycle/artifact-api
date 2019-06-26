@@ -1,6 +1,0 @@
-[submodule "badoda"]
-	path = badoda
-	url = https://cyclecycle:inmyhead112@bitbucket.org/cyclecycle/badoda-core.git
-[submodule "lance"]
-	path = lance
-	url = https://cyclecycle:inmyhead112@bitbucket.org/cyclecycle/lance.git
