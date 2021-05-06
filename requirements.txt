@@ -6,7 +6,7 @@ cymem==2.0.2
 cytoolz==0.9.0.1
 dill==0.2.8.2
 Flask==1.0.2
-Flask-Cors==3.0.7
+Flask-Cors==3.0.9
 Flask-Limiter==1.0.1
 gunicorn==19.9.0
 idna==2.7
